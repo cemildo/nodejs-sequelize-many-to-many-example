@@ -1,6 +1,6 @@
 module.exports = function(app, connection){
     app.route('/students')
-    .get(function (req, res) { 
+    .get(function (req, res) {  
         connection.student.find({
             include: [{
                 model: connection.lecture,

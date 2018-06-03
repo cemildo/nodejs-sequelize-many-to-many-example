@@ -10,26 +10,34 @@ exports.init = () => {
             timestamps: false
         }
     });
-    // TODO: fix this, all the shemas are already on the connection 
-    [student, lecture, enrollment] = shemas.init(connection),
+
     
-    connection.authenticate().then(() => {
-        console.log('Connection has been established successfully!!!');
-    })
+    connection.authenticate().then(() => console.log('Connection has been established successfully!!!'))
     .catch(err => console.log('Connection ERROR!', err)); 
     
-    student.belongsToMany(lecture, {
-        through: enrollment,
+    shemas.init(connection);
+    
+    // TODO :  this can be put on the req object and get it from there.
+    const sequalize = {
+        connection: connection,
+        student: connection.models.uni_student,
+        lecture:connection.models.uni_class,
+        enrollment: connection.models.uni_enrollment
+    };
+    
+ 
+    sequalize.student.belongsToMany(sequalize.lecture, {
+        through: sequalize.enrollment,
         as: 'class',
         foreignKey: 'fk_stuId', 
     });
 
 
-    lecture.belongsToMany(student, {
-        through: enrollment,
+    sequalize.lecture.belongsToMany(sequalize.student, {
+        through: sequalize.enrollment,
         as: 'student',
         foreignKey: 'fk_classNumber', 
     });
      
-    return {connection, student, lecture, enrollment};
+    return sequalize;
 } 
