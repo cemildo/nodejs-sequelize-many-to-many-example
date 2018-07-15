@@ -1,37 +1,31 @@
-const { insert, removeById , findById, findAll, updateById } =  require('../services/students');
+const StudentService =  require('../services/students');
 
-const create = () => {
-
-}
-
-const remove = () => {
+class StudentController{
+    static async create(req, res, connection){
+        const student = await StudentService.insert(connection, req.body);
+        res.json(student);
+    }
     
-}
-
-const get = (req, res, connection) => {
-    findAll(connection)
-    .then(result => {
-        res.json(result);
-    })
-    .catch(err => res.status(404).json(err)); 
-}
-
-const getOne = (req, res, connection) => {
-    findById(connection, req.params.id)
-    .then(result => {
-        res.json(result);
-    })
-    .catch(err => res.status(404).json(err)); 
-}
-
-const update = () => {
+    static async remove(req, res, connection) {
+        const student = await StudentService.removeById(connection, req.params.id);
+        res.json(student);
+    }
     
+    static async get(req, res, connection) {
+        const allStudents = await StudentService.findAll(connection);
+        res.json(allStudents);
+    }
+    
+    static async getOne(req, res, connection) {
+        const student = await StudentService.findById(connection, req.params.id);
+        res.json(student);
+    }
+    
+    static async update(req, res, connection) {
+        const student = await StudentService.updateById(connection, req.body);
+        res.json(student);
+    }
 }
 
-module.exports = {
-    create,
-    remove,
-    get,
-    update,
-    getOne
-}
+module.exports = StudentController;
+ 

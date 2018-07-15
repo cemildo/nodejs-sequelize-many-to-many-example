@@ -1,28 +1,25 @@
+class StudentService {
+    static async updateById(connection, student) {
+        const studentFromDb = await StudentService.findById(connection, student.stuId);
+        return studentFromDb.updateAttributes(student);
+    }
+    static insert(connection, student){
+        return connection.student.create(student);
+    }
+    static removeById(connection, id) {
+        return connection.student.destroy({ where: { stuId: id } })
+    }
 
+    static findById(connection, id) {
+        return connection.student.findOne({ where: { stuId: id } });
+    }
 
-const insert = (connection) => {
-
+    static findAll(connection) {
+        return connection.student.findAll({});
+    }
 }
 
-const removeById = (connection) => {
-    
-}
-
-const findById = (connection, id) => { 
-    return connection.student.findOne({ where: { stuId: id}});
-}
-
-const findAll = (connection) => {
-    return connection.student.findAll({});
-}
-
-const updateById = (connection) => {
-    
-}
-
-module.exports = {
-    insert, removeById , findById, findAll, updateById
-}
+module.exports = StudentService;
 
 /*
 
