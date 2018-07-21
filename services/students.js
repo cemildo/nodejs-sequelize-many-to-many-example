@@ -1,36 +1,35 @@
 class StudentService {
-    static async updateById(connection, student) {
-        const studentFromDb = await StudentService.findById(connection, student.stuId);
+    static async updateById(model, student) {
+        const studentFromDb = await StudentService.findById(model, student.stuId);
         return studentFromDb.updateAttributes(student);
     }
-    static insert(connection, student){
-        return connection.student.create(student);
+    static insert(model, student) { 
+        return model.create(student);
     }
-    static removeById(connection, id) {
-        return connection.student.destroy({ where: { stuId: id } })
-    }
-
-    static findById(connection, id) {
-        return connection.student.findOne({ where: { stuId: id } });
+    static removeById(model, id) {
+        return model.destroy({ where: { stuId: id } });
     }
 
-    static findAll(connection) {
-        return connection.student.findAll({});
+    static findById(model, id) {
+        return model.findOne({ where: { stuId: id } });
+    }
+
+    static findAll(model) {
+        return model.findAll({});
+    }
+
+    static findStudentByIdIcludeClasses(model, id) {
+        return model.find({
+            /* 
+            // get lecture model as well.
+            include: [{
+                model: lecture,
+                as:'class', 
+            }],
+            */
+            where: { stuId: id }
+        });
     }
 }
 
 module.exports = StudentService;
-
-/*
-
-connection.student.find({
-        include: [{
-            model: connection.lecture,
-            as:'class', 
-        }],
-        where: { stuId: 5 }
-        }).then(result => {
-            res.json(result);
-        }); 
-
-*/

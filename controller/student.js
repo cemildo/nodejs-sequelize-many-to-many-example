@@ -1,28 +1,33 @@
 const StudentService =  require('../services/students');
 
 class StudentController{
-    static async create(req, res, connection){
-        const student = await StudentService.insert(connection, req.body);
+    static async create(req, res){
+        const model = req.models.student;
+        const student = await StudentService.insert(model, req.body);
         res.json(student);
     }
     
-    static async remove(req, res, connection) {
-        const student = await StudentService.removeById(connection, req.params.id);
+    static async remove(req, res) {
+        const model = req.models.student;
+        const student = await StudentService.removeById(model, req.params.id);
         res.json(student);
     }
     
-    static async get(req, res, connection) {
-        const allStudents = await StudentService.findAll(connection);
+    static async get(req, res) {
+        const model = req.models.student;
+        const allStudents = await StudentService.findAll(model);
         res.json(allStudents);
     }
     
-    static async getOne(req, res, connection) {
-        const student = await StudentService.findById(connection, req.params.id);
+    static async getOne(req, res) {
+        const model = req.models.student;
+        const student = await StudentService.findById(model, req.params.id);
         res.json(student);
     }
     
-    static async update(req, res, connection) {
-        const student = await StudentService.updateById(connection, req.body);
+    static async update(req, res) {
+        const model = req.models.student;
+        const student = await StudentService.updateById(model, req.body);
         res.json(student);
     }
 }

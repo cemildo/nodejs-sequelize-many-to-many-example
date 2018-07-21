@@ -4,16 +4,16 @@ const app = express();
 const bodyParser = require('body-parser')
 const database = require('./database');
 
-const connection = database.init();
- 
+// const connection = database.init();
+app.use(database.init)
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
   
-require("./routers/students.js")(app, connection);
-require("./routers/classes.js")(app, connection);
-require("./routers/enrollments.js")(app, connection);
+require("./routers/students.js")(app);
+require("./routers/classes.js")(app);
+require("./routers/enrollments.js")(app);
  
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 

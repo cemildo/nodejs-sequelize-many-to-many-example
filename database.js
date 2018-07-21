@@ -1,6 +1,13 @@
 const Sequelize = require('sequelize');
-var shemas = require('./shemas');
-exports.init = () => {
+const shemas = require('./shemas');
+let models = null;
+
+module.exports.init = (req, res, next) => {
+    if(models) {
+        req.models = models;
+        return next();
+    }
+    
     const connection = new Sequelize(
         'db_itclub', 'db_administrator', '1tclub_db_pass!', {
         host: 'db4free.net',
@@ -22,8 +29,7 @@ exports.init = () => {
     ] = shemas.init(connection);
     
     // TODO :  this can be put on the req object and get it from there.
-    const sequalize = {
-        connection: connection,
+    const sequalize = { 
         student,
         lecture,
         enrollment
@@ -42,5 +48,7 @@ exports.init = () => {
         foreignKey: 'fk_classNumber', 
     });
      
-    return sequalize;
+    req.models = sequalize;
+    models = sequalize;
+    next();
 }
