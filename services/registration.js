@@ -12,7 +12,7 @@ class RegistrationService {
   static async removeById(req, res) {
     return await req.models.uni_registration.destroy({
       where: {
-        sessionId: req.params.id
+        registrationId: req.params.id
       }
     });
   }
@@ -20,42 +20,14 @@ class RegistrationService {
   static async findById(req, res) {
     return await req.models.uni_registration.findOne({
       where: {
-        sessionId: req.params.id
+        registrationId: req.params.id
       }
     });
   }
 
   static async findAll(req, res) {
     return await req.models.uni_registration.findAll({});
-  }
-
-  // get lecture model as well.
-  static async findClassAndStudentBySessionId(req, res) {
-    return await req.models.uni_registration.findAll({
-      include: [
-        {
-          model: req.models.uni_class,
-          as: 'uni_class',
-        },
-        {
-          model: req.models.uni_student,
-          as: 'uni_student',
-        },
-        {
-          model: req.models.uni_teacher,
-          as: 'uni_teacher',
-        }],
-      attributes: [
-        'sessionId',
-        'teacherId',
-        'placeId',
-        'schoolId'
-      ],
-      where: {
-        classId: req.params.id
-      }
-    });
-  }
+  } 
 }
 
 module.exports = RegistrationService;

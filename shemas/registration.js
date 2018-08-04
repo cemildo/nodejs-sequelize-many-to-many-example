@@ -1,7 +1,7 @@
 const sequelize = require('sequelize');
 
 exports.init = (connection) => {
-    const Session = connection.define('uni_registration', {
+    const Registration = connection.define('uni_registration', {
         registrationId: {
             type: sequelize.INTEGER,
             primaryKey: true,
@@ -19,40 +19,48 @@ exports.init = (connection) => {
         studentId: sequelize.INTEGER,
         schoolId: sequelize.INTEGER
     });
+    
+  // one class can have multuple student
+  connection.models.uni_class.belongsToMany(connection.models.uni_student, {
+    through: { model: Registration },
+    foreignKey: 'classId',
+    constraints: false
+  });
+
+  // one student can have multuple class
+  connection.models.uni_student.belongsToMany(connection.models.uni_class, {
+    through: { model: Registration },
+    foreignKey: 'studentId',
+    constraints: false
+  });
+
+  // one student can have multuple teacher
+  connection.models.uni_student.belongsToMany(connection.models.uni_teacher, {
+    through: { model: Registration },
+    foreignKey: 'studentId',
+    constraints: false
+  });
+
+  // one teacher can have multuple student
+  connection.models.uni_teacher.belongsToMany(connection.models.uni_student, {
+    through: { model: Registration },
+    foreignKey: 'teacherId',
+    constraints: false
+  });
 
 
+  connection.models.uni_teacher.belongsToMany(connection.models.uni_class, {
+    through: { model: Registration },
+    foreignKey: 'teacherId',
+    constraints: false
+  });
 
-      // connection.models.uni_student.belongsToMany(connection.models.uni_class,
-      // { through: Session, as: 'class', foreignKey: 'classId' });
+  connection.models.uni_class.belongsToMany(connection.models.uni_teacher, {
+    through: { model: Registration },
+    foreignKey: 'classId',
+    constraints: false
+  });
 
-
-
-      // SequelizeEagerLoadingError: uni_class is not associated to uni_registration!
-/*
-      Session.hasOne(connection.models.uni_class,
-        {foreignKey: 'classNumber', as: 'uni_class'});
-
-      Session.hasMany(connection.models.uni_student,
-        {foreignKey: 'stuId', as: 'uni_student'});
-
-      Session.hasOne(connection.models.uni_teacher,
-        {foreignKey: 'teacherNumber', as: 'uni_teacher'});
-
-
-        connection.models.uni_class.belongsToMany(connection.models.uni_student,
-         {through: Session,
-          as: 'uni_student',
-          foreignKey: 'classId'});
-
-*/
-
-       // Session.hasMany(connection.models.uni_student,
-       // {foreignKey: 'stuId', as: 'uni_student'});
-
-       // Session.hasMany(connection.models.uni_class,
-       //     {foreignKey: 'classNumber', as: 'uni_class'});
-
-    return Session;
-
+  return Registration; 
 }
-
+ 

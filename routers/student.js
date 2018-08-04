@@ -9,4 +9,7 @@ module.exports = function(app){
        .get(StudentController.getOne)
        .put(StudentController.update)
        .delete(StudentController.remove);
+     
+    app.route('/student/:id/teachers')
+       .get(StudentController.findStudentByIdIcludeTeachers);    
 };

@@ -1,9 +1,9 @@
 const student = require('./student');
 const lecture = require('./class');
 const teacher = require('./teacher');
-const session = require('./registration');
+const registration = require('./registration');
 
-const shemas = [student, lecture, teacher, session];
+const shemas = [student, lecture, teacher, registration];
 
 module.exports = {
     init: (sequelize) => {

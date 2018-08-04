@@ -30,15 +30,16 @@ class ClassService {
   }
 
   // get lecture model as well.
-  static findClassByIdIcludeStudent(req, res) {
-    return req.models.uni_class.find({
-      include: [{
-        model: req.models.uni_student,
-        as: 'class',
-      }],
-      where: {
-        classId: req.params.id
-      }
+  static async findClassByIdIcludeStudent(req, res) {
+    return await req.models.uni_class.findAll({
+      include: [ 
+        { model: req.models.uni_student},
+        { model: req.models.uni_teacher}
+      ],
+     // attributes: [
+     //   'teacherId', 'placeId', 'schoolId'
+     //  ],
+      where: { classNumber: req.params.id }
     });
   }
 }

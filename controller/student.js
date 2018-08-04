@@ -25,6 +25,12 @@ class StudentController{
         const student = await StudentService.updateById(req, res);
         res.json(student);
     }
+    
+    static async findStudentByIdIcludeTeachers(req, res) {
+        let student = await StudentService.findStudentByIdIcludeTeachers(req, res);
+         
+        res.json(student);
+    }
 }
 
 module.exports = StudentController;

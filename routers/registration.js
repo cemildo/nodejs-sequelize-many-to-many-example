@@ -1,15 +1,12 @@
 const RegistrationController = require('../controller/registration');
 
 module.exports = function(app){
-    app.route('/sessions')
+    app.route('/registration')
        .get(RegistrationController.get)
        .post(RegistrationController.create);
 
-    app.route('/sessions/:id')
+    app.route('/registration/:id')
        .get(RegistrationController.getOne)
        .put(RegistrationController.update)
-       .delete(RegistrationController.remove);
-
-    app.route('/sessions/class/:id')
-       .get(RegistrationController.findClassAndStudentBySessionId)
+       .delete(RegistrationController.remove); 
 };

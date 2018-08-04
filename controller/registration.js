@@ -1,6 +1,6 @@
 const RegistrationService =  require('../services/registration');
 
-class SessionController{
+class RegistrationController{
     static async create(req, res){
         const session = await RegistrationService.insert(req, res);
         res.json(session);
@@ -12,8 +12,8 @@ class SessionController{
     }
 
     static async get(req, res) {
-        const allSessions = await RegistrationService.findAll(req, res);
-        res.json(allSessions);
+        const registrations = await RegistrationService.findAll(req, res);
+        res.json(registrations);
     }
 
     static async getOne(req, res) {
@@ -24,12 +24,7 @@ class SessionController{
     static async update(req, res) {
         const session = await RegistrationService.updateById(req, res);
         res.json(session);
-    }
-
-    static async findClassAndStudentBySessionId(req, res) {
-        const session = await RegistrationService.findClassAndStudentBySessionId(req, res);
-        res.json(session);
-    }
+    } 
 }
 
-module.exports = SessionController;
+module.exports = RegistrationController;

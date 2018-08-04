@@ -25,6 +25,12 @@ class ClassController{
         const lecture = await ClassService.updateById(req, res);
         res.json(lecture);
     }
+
+    static async findClassByIdIcludeStudent(req, res) {
+        let lecture = await ClassService.findClassByIdIcludeStudent(req, res);
+         
+        res.json(lecture);
+    }
 }
 
 module.exports = ClassController;

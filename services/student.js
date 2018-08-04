@@ -28,17 +28,17 @@ class StudentService {
   static findAll(req, res) {
     return req.models.uni_student.findAll({});
   }
-
-  // get lecture model as well.
-  static findStudentByIdIcludeClasses(req, res) {
-    return req.models.uni_student.find({
-      include: [{
-        model: req.models.uni_class,
-        as: 'class',
-      }],
-      where: {
-        stuId: req.params.id
-      }
+ 
+  static async findStudentByIdIcludeTeachers(req, res) {
+    return await req.models.uni_student.findAll({
+      include: [ 
+        { model: req.models.uni_class},
+        { model: req.models.uni_teacher}
+      ],
+     // attributes: [
+     //   'teacherId', 'placeId', 'schoolId'
+     //  ],
+      where: { stuId: req.params.id }
     });
   }
 }
