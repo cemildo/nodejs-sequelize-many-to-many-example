@@ -1,9 +1,15 @@
-const student = require('./students');
-const lecture = require('./classes');
-const enrollment = require('./enrollment');
+const student = require('./student');
+const lecture = require('./class');
+const teacher = require('./teacher');
+const session = require('./registration');
 
-const shemas = [student, lecture, enrollment];
+const shemas = [student, lecture, teacher, session];
 
 module.exports = {
-    init: (connection) => shemas.map(shema => shema.init(connection))
+    init: (sequelize) => {
+      let models = {};
+      shemas.map(shema => shema.init(sequelize))
+            .map(model => models[model.name] = model)
+      return models;
+    }
 }

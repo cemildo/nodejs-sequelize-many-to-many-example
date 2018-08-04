@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
- 
+
 exports.init = (connection) => {
     return connection.define('uni_student', {
         stuId: {
@@ -13,3 +13,11 @@ exports.init = (connection) => {
         credits: sequelize.INTEGER
     });
 }
+
+/*
+User.associate = function(models) {
+  models.User.hasMany(models.Task);
+};
+
+return User;
+*/

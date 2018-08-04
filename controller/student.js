@@ -1,36 +1,30 @@
-const StudentService =  require('../services/students');
+const StudentService =  require('../services/student');
 
 class StudentController{
     static async create(req, res){
-        const model = req.models.student;
-        const student = await StudentService.insert(model, req.body);
+        const student = await StudentService.insert(req, res);
         res.json(student);
     }
-    
+
     static async remove(req, res) {
-        const model = req.models.student;
-        const student = await StudentService.removeById(model, req.params.id);
+        const student = await StudentService.removeById(req, res);
         res.json(student);
     }
-    
+
     static async get(req, res) {
-        const model = req.models.student;
-        const allStudents = await StudentService.findAll(model);
+        const allStudents = await StudentService.findAll(req, res);
         res.json(allStudents);
     }
-    
+
     static async getOne(req, res) {
-        const model = req.models.student;
-        const student = await StudentService.findById(model, req.params.id);
+        const student = await StudentService.findById(req, res);
         res.json(student);
     }
-    
+
     static async update(req, res) {
-        const model = req.models.student;
-        const student = await StudentService.updateById(model, req.body);
+        const student = await StudentService.updateById(req, res);
         res.json(student);
     }
 }
 
 module.exports = StudentController;
- 

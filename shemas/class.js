@@ -1,8 +1,7 @@
 const sequelize = require('sequelize');
 
-
 exports.init = (connection) => {
-    return connection.define('uni_class', {
+    const Class = connection.define('uni_class', {
         classNumber: {
             type: sequelize.INTEGER,
             primaryKey: true,
@@ -12,4 +11,10 @@ exports.init = (connection) => {
         schedule: sequelize.DATE,
         room: sequelize.INTEGER
     });
+
+    // Class.hasMany(connection.models.uni_session,
+    //  {foreignKey: 'classId', as: 'uni_session'});
+
+
+    return Class;
 }
