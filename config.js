@@ -25,6 +25,10 @@ const config = {
     facebook: {
         clientID: envVars.clientID,
         clientSecret: envVars.clientSecret
+    },
+    google:{
+        clientID: envVars.clientID,
+        clientSecret: envVars.clientSecret
     }
 };
 
