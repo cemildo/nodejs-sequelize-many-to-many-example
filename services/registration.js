@@ -6,11 +6,11 @@ class RegistrationService {
   }
 
   static async insert(req, res) {
-    return await req.models.uni_session.create(req.body);
+    return await req.models.uni_registration.create(req.body);
   }
 
   static async removeById(req, res) {
-    return await req.models.uni_session.destroy({
+    return await req.models.uni_registration.destroy({
       where: {
         sessionId: req.params.id
       }
@@ -18,7 +18,7 @@ class RegistrationService {
   }
 
   static async findById(req, res) {
-    return await req.models.uni_session.findOne({
+    return await req.models.uni_registration.findOne({
       where: {
         sessionId: req.params.id
       }
@@ -26,12 +26,12 @@ class RegistrationService {
   }
 
   static async findAll(req, res) {
-    return await req.models.uni_session.findAll({});
+    return await req.models.uni_registration.findAll({});
   }
 
   // get lecture model as well.
   static async findClassAndStudentBySessionId(req, res) {
-    return await req.models.uni_session.findAll({
+    return await req.models.uni_registration.findAll({
       include: [
         {
           model: req.models.uni_class,

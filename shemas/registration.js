@@ -1,15 +1,19 @@
 const sequelize = require('sequelize');
 
 exports.init = (connection) => {
-    const Session = connection.define('uni_session', {
-        sessionId: {
+    const Session = connection.define('uni_registration', {
+        registrationId: {
             type: sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         sessionName: sequelize.STRING(50),
         classId: sequelize.INTEGER,
-        time: sequelize.DATE,
+        register_date: {
+          type: sequelize.DATE,
+          allowNull: false,
+          defaultValue: sequelize.NOW
+        },
         teacherId: sequelize.INTEGER,
         placeId: sequelize.INTEGER,
         studentId: sequelize.INTEGER,
@@ -23,7 +27,7 @@ exports.init = (connection) => {
 
 
 
-      // SequelizeEagerLoadingError: uni_class is not associated to uni_session!
+      // SequelizeEagerLoadingError: uni_class is not associated to uni_registration!
 /*
       Session.hasOne(connection.models.uni_class,
         {foreignKey: 'classNumber', as: 'uni_class'});

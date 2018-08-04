@@ -12,8 +12,8 @@ exports.init = (connection) => {
         room: sequelize.INTEGER
     });
 
-    // Class.hasMany(connection.models.uni_session,
-    //  {foreignKey: 'classId', as: 'uni_session'});
+    // Class.hasMany(connection.models.uni_registration,
+    //  {foreignKey: 'classId', as: 'uni_registration'});
 
 
     return Class;
