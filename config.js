@@ -1,8 +1,11 @@
+const dotenv = require('dotenv');
+const envVars = dotenv.config().parsed;
+
 const config = {
     db: {
         name:'db_school',
         user:'root',
-        password: `${process.env.MYSQL_PASSWORD}`,
+        password: `${envVars.MYSQL_PASSWORD}`,
         connection: {
             params: {
                 dialect: 'mysql',
@@ -18,6 +21,10 @@ const config = {
                 force: false
             }
         }
+    },
+    facebook: {
+        clientID: envVars.clientID,
+        clientSecret: envVars.clientSecret
     }
 };
 
