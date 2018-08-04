@@ -2,10 +2,12 @@ const dotenv = require('dotenv');
 const envVars = dotenv.config().parsed;
 
 const config = {
+    host: 'http://localhost',
+    port: '3000',
     db: {
         name:'db_school',
         user:'root',
-        password: `${envVars.MYSQL_PASSWORD}`,
+        password: envVars.MYSQL_PASSWORD ,
         connection: {
             params: {
                 dialect: 'mysql',
