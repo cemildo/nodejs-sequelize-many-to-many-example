@@ -18,13 +18,13 @@ app.use(function(req,res,next){
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/dist/school-app')));
 
 routers.init(app);
 
 
 /* GET home page. */
-router.get('/', (req, res) => res.render('src/index',{})); 
+router.get('/', (req, res) => res.render('index',{})); 
 
 // check if database connection exist then start the application
 database.authenticate()
