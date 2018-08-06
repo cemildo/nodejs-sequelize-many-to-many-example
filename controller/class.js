@@ -26,8 +26,8 @@ class ClassController{
         res.json(lecture);
     }
 
-    static async findClassByIdIcludeStudent(req, res) {
-        let lecture = await ClassService.findClassByIdIcludeStudent(req, res);
+    static async findClassByIdIncludeRelatedStudentAndTeachers(req, res) {
+        let lecture = await ClassService.findClassByIdIncludeRelatedStudentAndTeachers(req, res);
          
         res.json(lecture);
     }

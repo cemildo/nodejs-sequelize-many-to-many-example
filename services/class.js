@@ -30,7 +30,7 @@ class ClassService {
   }
 
   // get lecture model as well.
-  static async findClassByIdIcludeStudent(req, res) {
+  static async findClassByIdIncludeRelatedStudentAndTeachers(req, res) {
     return await req.models.uni_class.findAll({
       include: [ 
         { model: req.models.uni_student},

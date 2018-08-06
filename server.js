@@ -1,5 +1,7 @@
 const express = require('express');
+const path = require('path');
 const app = express();
+const router = express.Router();
 const bodyParser = require('body-parser');
 const routers = require('./routers');
 const database = require('./database').init();
@@ -13,17 +15,22 @@ app.use(function(req,res,next){
   next();
 });
 
-
 app.use(bodyParser.urlencoded({ extended: false }));
- 
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 routers.init(app);
+
+
+/* GET home page. */
+router.get('/', (req, res) => res.render('src/index',{})); 
 
 // check if database connection exist then start the application
 database.authenticate()
 .then(() => {
   console.log('Database open for businiess!!!');
   app.listen(config.port, () => console.log(`Example app listening on port ${config.port}!`));
+
 })
 .catch(err => console.log('Database connection ERROR!', err)); 

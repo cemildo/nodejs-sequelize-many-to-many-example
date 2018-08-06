@@ -29,8 +29,8 @@ const config = {
         clientSecret: envVars.clientSecret
     },
     google:{
-        clientID: envVars.clientID,
-        clientSecret: envVars.clientSecret
+        clientID: envVars.GoogleClientID,
+        clientSecret: envVars.GoogleClientSecret
     }
 };
 

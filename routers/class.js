@@ -11,5 +11,5 @@ module.exports = function(app){
        .delete(ClassController.remove);
 
     app.route('/class/:id/students')
-       .get(ClassController.findClassByIdIcludeStudent);  
+       .get(ClassController.findClassByIdIncludeRelatedStudentAndTeachers);  
 };
