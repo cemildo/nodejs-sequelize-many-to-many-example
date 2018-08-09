@@ -1,30 +1,38 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './components/app-home/app.component';
-import { AppHeaderComponent } from './components/app-header/app-header.component';
-import { AppContentComponent } from './components/app-content/app-content.component';
-import { AppFooterComponent } from './components/app-footer/app-footer.component';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { PersonCardComponent } from './components/person-card/person-card.component';
+
+import { AppRoutingModule } from './app.routing';
+import { ComponentsModule } from './components/components.module';
+
+import { AppComponent } from './app.component';
+
+import {
+  AgmCoreModule
+} from '@agm/core';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
+
 
 @NgModule({
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpModule,
+    ComponentsModule,
+    RouterModule,
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA3M6S2JMScFUbxoZ8zWKqlg5rSfHMzPo0'
+    })
+  ],
   declarations: [
     AppComponent,
-    AppHeaderComponent,
-    AppContentComponent,
-    AppFooterComponent,
-    SideBarComponent,
-    PersonCardComponent
+    AdminLayoutComponent,
   ],
-  imports: [
-    BrowserModule,
-  ],
-  exports:[
-    AppHeaderComponent,
-    AppContentComponent,
-    AppFooterComponent
-  ], 
   providers: [],
   bootstrap: [AppComponent]
 })
