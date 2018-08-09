@@ -11,7 +11,7 @@ const config = {
         connection: {
             params: {
                 dialect: 'mysql',
-                host: '127.0.0.1', 
+                host: '127.0.0.1',
                 define: {
                     freezeTableName: true,
                     timestamps: false
@@ -31,7 +31,8 @@ const config = {
     google:{
         clientID: envVars.GoogleClientID,
         clientSecret: envVars.GoogleClientSecret
-    }
+    },
+    front_root: 'public/dist/school-app'
 };
 
 module.exports = config;

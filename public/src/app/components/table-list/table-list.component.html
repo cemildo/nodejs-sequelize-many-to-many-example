@@ -1,0 +1,48 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Simple Table</h4>
+                      <p class="card-category"> Here is a subtitle for this table</p>
+                  </div>
+                  <div class="card-body" *ngIf="data">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th> teacherNumber</th>
+                                  <th> first_name</th>
+                                  <th> last_name</th>
+                                  <th> email</th>
+                                  <th> branch</th>
+                                  <th> birthday</th>
+                                  <th> </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let teacher of data">
+                                      <td [innerHTML]="teacher.teacherNumber"> </td>
+                                      <td [innerHTML]="teacher.first_name"> </td>
+                                      <td [innerHTML]="teacher.last_name"> </td>
+                                      <td [innerHTML]="teacher.email"> </td>
+                                      <td [innerHTML]="teacher.branch"> </td>
+                                      <td [innerHTML]="teacher.birthday"> </td>
+                                      <td>
+                                          <button mat-mini-fab color="default" (click)="editItem(teacher.teacherNumber)">
+                                              <mat-icon>edit</mat-icon>
+                                          </button>
+                                          <button mat-mini-fab color="default" (click)="deleteItem(teacher.teacherNumber)">
+                                              <mat-icon>delete_outline</mat-icon>
+                                          </button>
+                                      </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

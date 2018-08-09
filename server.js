@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -8,8 +9,10 @@ const database = require('./database').init();
 const shemas = require('./shemas').init(database);
 const config = require('./config');
 
+app.use(cors());
+
 app.use(function(req,res,next){
-  // inject all the sequelize models into req object 
+  // inject all the sequelize models into req object
   // so that it will be available to all routes
   req.models = req.models || shemas;
   next();
@@ -18,13 +21,13 @@ app.use(function(req,res,next){
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'public/dist/school-app')));
+app.use(express.static(path.join(__dirname, config.front_root)));
 
 routers.init(app);
 
 
 /* GET home page. */
-router.get('/', (req, res) => res.render('index',{})); 
+router.get('/', (req, res) => res.render('index',{}));
 
 // check if database connection exist then start the application
 database.authenticate()
@@ -33,4 +36,4 @@ database.authenticate()
   app.listen(config.port, () => console.log(`Example app listening on port ${config.port}!`));
 
 })
-.catch(err => console.log('Database connection ERROR!', err)); 
+.catch(err => console.log('Database connection ERROR!', err));

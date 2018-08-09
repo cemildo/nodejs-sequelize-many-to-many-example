@@ -7,8 +7,11 @@ exports.init = (connection) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: sequelize.STRING(50),
+        first_name: sequelize.STRING(50),
+        last_name: sequelize.STRING(50),
+        email: sequelize.STRING(50),
         branch: sequelize.STRING(50),
-        birthday: sequelize.DATE
+        birthday: sequelize.DATE,
+        description: sequelize.STRING(500),
     });
 }

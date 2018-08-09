@@ -17,9 +17,9 @@ export class TabsComponent implements OnInit {
         text: 'All'
       },
       {
-        route: ['.', 'add-edit'],
+        route: ['.', 'add'],
         icon: 'person',
-        text: 'Add/Edit'
+        text: 'Add'
       },
       {
         route: ['.', 'assign'],
